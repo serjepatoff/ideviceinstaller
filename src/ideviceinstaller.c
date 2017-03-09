@@ -906,7 +906,7 @@ run_again:
 					dstpath = NULL;
 
 					zip_uint64_t zfsize = 0;
-					while (zfsize < zs.size) {
+					while (zfsize < (long long) zs.size) {
 						zip_int64_t amount = zip_fread(zfile, buf, sizeof(buf));
 						if (amount == 0) {
 							break;
@@ -924,7 +924,7 @@ run_again:
 								total += written;
 							}
 							if (total != amount) {
-								fprintf(stderr, "Error: wrote only %d of %" PRIi64 "\n", total, amount);
+								fprintf(stderr, "Error: wrote only %d of %" PRIi64 "\n", total, (long long) amount);
 								afc_file_close(afc, af);
 								zip_fclose(zfile);
 								free(dstpath);
